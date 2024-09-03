@@ -23,7 +23,6 @@ const Carousel = ({ images }) => {
             <img
               src={image}
               alt={`Slide ${index}`}
-              style={{ width: "100%", height: "auto" }}
               className="object-contain w-[400px] h-[225px] aspect-[16/9] rounded-md"
             />
           </div>

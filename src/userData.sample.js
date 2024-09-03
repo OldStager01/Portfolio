@@ -19,6 +19,7 @@ const data = {
       technologies: ["Tech1", "Tech2", "Tech3"], // Placeholder for technologies used
       githubLink: "https://github.com/yourusername/project", // Placeholder for GitHub project link
       website: "https://projectwebsite.com", // Placeholder for project website
+      images: ["#", "#", "#"], // Placeholder for project images
     },
   ],
   education: {

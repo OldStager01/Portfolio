@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   ChevronUpIcon,
   Github,
@@ -19,6 +19,8 @@ import GithubButton from "./components/GithubButton";
 import CertificateButton from "./components/CertificateButton";
 import LinkButton from "./components/LinkButton";
 import Carousel from "./components/Carousel";
+import Typewriter from "typewriter-effect";
+
 export default function Component() {
   const [isVisible, setIsVisible] = useState(false);
   const [darkMode, setDarkMode] = useState(true);
@@ -27,6 +29,8 @@ export default function Component() {
   const [showAllCourses, setShowAllCourses] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const projectRef = useRef(null);
+  const hackathonRef = useRef(null);
   const PUBLIC_URL = "/";
 
   useEffect(() => {
@@ -93,7 +97,14 @@ export default function Component() {
     <div className="min-h-screen bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-300">
       <header className="bg-white dark:bg-gray-800 shadow-sm sticky top-0 z-10">
         <nav className="container mx-auto px-4 py-4 flex justify-between items-center">
-          <h1 className="text-2xl font-bold">{userData.name}</h1>
+          {/* <h1 className="text-2xl font-bold">{userData.name}</h1> */}
+          <h1 className="text-2xl md:text-3xl font-mono font-bold text-gray-800 dark:text-white">
+            <Typewriter
+              onInit={(typewriter) => {
+                typewriter.typeString(userData.titleString).start();
+              }}
+            />
+          </h1>
           <div className="flex items-center space-x-4">
             <div className="hidden md:flex space-x-4">
               {navLinks.map((link) => (
@@ -154,9 +165,7 @@ export default function Component() {
           <img
             src={userData.avatar}
             alt={userData.name}
-            width={200}
-            height={200}
-            className="rounded-full shadow-lg"
+            className="w-48 h-48 rounded-full object-cover object-center shadow-lg aspect-square bg-white"
           />
           <div className="text-center md:text-left">
             <h2 className="text-3xl font-bold mb-2">{userData.name}</h2>
@@ -236,7 +245,7 @@ export default function Component() {
           </div>
         </section>
 
-        <section id="projects" className="space-y-8">
+        <section id="projects" ref={projectRef} className="space-y-8">
           <h2 className="text-2xl font-bold border-b-2 border-gray-200 dark:border-gray-700 pb-2">
             Projects
           </h2>
@@ -280,16 +289,11 @@ export default function Component() {
                       : {}
                   }
                 >
-                  {/* <img
-                    src={project.image}
-                    width={"400px"}
-                    height={"225px"}
-                    alt="Project  "
-                    className="rounded-t-xl w-full aspect-[16/9] object-cover"
-                  /> */}
-                  <div className="mx-4 mb-8 max-w-[500px] max-h-[300px] overflow-visible">
-                    <Carousel images={project.images} />
-                  </div>
+                  {project.images && project.images.length > 0 && (
+                    <div className="mx-4 mb-8 max-w-[500px] max-h-[300px] overflow-visible shadow-md hover:shadow-lg ">
+                      <Carousel images={project.images} />
+                    </div>
+                  )}
                   <h3 className="text-xl font-semibold">{project.name}</h3>
                   <p className="text-gray-600 dark:text-gray-400">
                     {project.description}
@@ -324,7 +328,12 @@ export default function Component() {
                 onClick={() => {
                   setShowAllProjects(!showAllProjects);
                   if (showAllProjects) {
-                    scrollToTarget("projects");
+                    setTimeout(() => {
+                      projectRef.current.scrollIntoView({
+                        behavior: "smooth",
+                        block: "end",
+                      });
+                    }, 0);
                   }
                 }}
                 className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
@@ -533,9 +542,6 @@ export default function Component() {
               <button
                 onClick={() => {
                   setShowAllCourses(!showAllCourses);
-                  if (!showAllCourses) {
-                    scrollToTarget("courses");
-                  }
                 }}
                 className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
               >
@@ -553,7 +559,7 @@ export default function Component() {
           )}
         </section>
 
-        <section id="hackathons" className="space-y-8">
+        <section id="hackathons" ref={hackathonRef} className="space-y-8">
           <h2 className="text-2xl font-bold border-b-2 border-gray-200 dark:border-gray-700 pb-2">
             Hackathons and Competitions
           </h2>
@@ -623,7 +629,17 @@ export default function Component() {
           (windowWidth <= 768 && userData.competitions.length > 4) ? (
             <div className="text-center">
               <button
-                onClick={() => setShowAllHackathons(!showAllHackathons)}
+                onClick={() => {
+                  setShowAllHackathons(!showAllHackathons);
+                  if (showAllHackathons) {
+                    setTimeout(() => {
+                      hackathonRef.current.scrollIntoView({
+                        behavior: "smooth",
+                        block: "end",
+                      });
+                    }, 0);
+                  }
+                }}
                 className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
               >
                 {showAllHackathons ? "Show Less" : "View More"}
