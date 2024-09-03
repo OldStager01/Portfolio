@@ -9,7 +9,7 @@ const CertificateButton = ({ children, repoLink }) => {
         fontFamily: "'Roboto', sans-serif",
         textDecoration: "none",
       }}
-      className="inline-flex items-center justify-between min-w-[150px] py-2 px-2 min-h-[40px] bg-transparent border-slate-800 hover:bg-slate-700 hover:text-white text-[14px] rounded-md dark:border-white border-[1px] dark:hover:bg-white dark:hover:text-black group"
+      className="inline-flex items-center justify-between cursor-pointer min-w-[150px] py-2 px-2 min-h-[40px] bg-transparent border-slate-800 hover:bg-slate-700 hover:text-white text-[14px] rounded-md dark:border-white border-[1px] dark:hover:bg-white dark:hover:text-black group"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"

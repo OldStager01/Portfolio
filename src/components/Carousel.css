@@ -1,0 +1,38 @@
+/* carousel.css */
+.slick-dots li button:before {
+    @apply text-gray-300; /* Default dot color in light mode */
+  }
+  
+  .dark .slick-dots li button:before {
+    @apply text-white; /* Dot color in dark mode */
+  }
+  
+  .slick-dots li.slick-active button:before {
+    @apply text-gray-500; /* Active dot color in light mode */
+  }
+  
+  .dark .slick-dots li.slick-active button:before {
+    @apply text-white; /* Active dot color in dark mode */
+  }
+
+/* Default arrow color in light mode */
+.slick-prev::before, .slick-next::before {
+  @apply text-gray-800; /* Dark arrow color in light mode */
+}
+
+/* Arrow color in dark mode */
+.dark .slick-prev::before, 
+.dark .slick-next::before {
+  @apply text-gray-300; /* Lighter arrow color in dark mode */
+}
+
+/* Optional: Hover effect */
+.slick-prev:hover::before, 
+.slick-next:hover::before {
+  @apply text-blue-500; /* Hover effect in light mode */
+}
+
+.dark .slick-prev:hover::before, 
+.dark .slick-next:hover::before {
+  @apply text-blue-300; /* Hover effect in dark mode */
+}

@@ -9,13 +9,13 @@ const GithubButton = ({ children, repoLink }) => {
         fontFamily: "'Roboto', sans-serif",
         textDecoration: "none",
       }}
-      className="inline-flex items-center min-h-[40px] bg-transparent border-slate-800 hover:bg-slate-700 hover:text-white text-[14px] py-2 pr-3 rounded-md dark:border-white border-[1px] dark:hover:bg-white dark:hover:text-black group"
+      className="inline-flex items-center min-h-[40px] cursor-pointer bg-slate-600 text-white border-slate-800 hover:bg-slate-700 text-sm py-2 pr-3 rounded-md dark:text-black dark:border-black border-[1px] dark:bg-white dark:hover:bg-gray-200 dark:hover:text-black group"
     >
       <svg
-        height="18"
+        height="20"
         viewBox="0 0 16 16"
         width="40px"
-        className="fill-black group-hover:fill-white dark:fill-white dark:group-hover:fill-black "
+        className="fill-white group-hover:fill-white dark:fill-black dark:group-hover:fill-black "
       >
         <path
           fillRule="evenodd"

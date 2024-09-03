@@ -2,7 +2,9 @@ import { useState, useEffect } from "react";
 import {
   ChevronUpIcon,
   Github,
+  GithubIcon,
   LinkedinIcon,
+  DownloadIcon,
   MailIcon,
   MoonIcon,
   SunIcon,
@@ -16,6 +18,7 @@ import userData from "./userData";
 import GithubButton from "./components/GithubButton";
 import CertificateButton from "./components/CertificateButton";
 import LinkButton from "./components/LinkButton";
+import Carousel from "./components/Carousel";
 export default function Component() {
   const [isVisible, setIsVisible] = useState(false);
   const [darkMode, setDarkMode] = useState(true);
@@ -24,6 +27,8 @@ export default function Component() {
   const [showAllCourses, setShowAllCourses] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const PUBLIC_URL = "/";
+
   useEffect(() => {
     const handleResize = () => {
       setWindowWidth(window.innerWidth);
@@ -63,218 +68,25 @@ export default function Component() {
       behavior: "smooth",
     });
   };
+  const scrollToTarget = (id) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth", block: "end" });
+    }
+  };
 
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
   };
   const navLinks = [
     { href: "#about", text: "About" },
-    { href: "#projects", text: "Projects" },
     { href: "#skills", text: "Skills" },
+    { href: "#projects", text: "Projects" },
     { href: "#education", text: "Education" },
-    { href: "#hackathons", text: "Hackathons" },
-  ];
-
-  const hackathons = [
-    {
-      name: "TechCrunch Disrupt Hackathon",
-      date: "September 2023",
-      organization: "TechCrunch",
-      achievement: "1st Place Overall",
-      projectSummary:
-        "Developed an AI-powered personal finance assistant that provides tailored advice and investment strategies.",
-      repoLink: "https://github.com/johndoe/fintech-ai-assistant",
-      eventLink: "https://techcrunch.com/events/disrupt-2023/",
-    },
-    {
-      name: "Google Cloud Next Hackathon",
-      date: "July 2023",
-      organization: "Google Cloud",
-      achievement: "Best Use of Google Cloud AI",
-      projectSummary:
-        "Created a real-time language translation app for video calls using Google Cloud's Speech-to-Text and Translation APIs.",
-      repoLink: "https://github.com/johndoe/realtime-video-translator",
-      eventLink:
-        "https://cloud.google.com/blog/topics/events/google-cloud-next",
-    },
-    {
-      name: "NASA Space Apps Challenge",
-      date: "October 2022",
-      organization: "NASA",
-      achievement: "Global Finalist",
-      projectSummary:
-        "Built a web application that visualizes climate change data from NASA satellites to raise awareness and promote action.",
-      repoLink: "https://github.com/johndoe/climate-viz",
-      eventLink: "https://www.spaceappschallenge.org/",
-    },
-    {
-      name: "MLH Local Hack Day",
-      date: "December 2022",
-      organization: "Major League Hacking",
-      achievement: "Best Hardware Hack",
-      projectSummary:
-        "Developed a smart home energy management system using Raspberry Pi and machine learning algorithms.",
-      repoLink: "https://github.com/johndoe/smart-energy-manager",
-      eventLink: "https://mlh.io/seasons/2023/events",
-    },
-    {
-      name: "AI for Good Hackathon",
-      date: "March 2023",
-      organization: "United Nations",
-      achievement: "Most Innovative Solution",
-      projectSummary:
-        "Created an AI-driven platform to optimize resource distribution for refugee camps, improving living conditions.",
-      repoLink: "https://github.com/johndoe/ai-for-good",
-      eventLink: "https://aiforgood.itu.int/",
-    },
-    {
-      name: "Ethereum DeFi Hackathon",
-      date: "May 2023",
-      organization: "Ethereum Foundation",
-      achievement: "Best DeFi Solution",
-      projectSummary:
-        "Developed a decentralized lending protocol with dynamic interest rates based on market conditions.",
-      repoLink: "https://github.com/johndoe/defi-lending",
-      eventLink: "https://ethereum.org/en/defi/",
-    },
-    {
-      name: "Cybersecurity Challenge",
-      date: "August 2023",
-      organization: "DEFCON",
-      achievement: "Top 10 Finalist",
-      projectSummary:
-        "Designed and implemented a novel intrusion detection system using machine learning algorithms.",
-      repoLink: "https://github.com/johndoe/ml-ids",
-      eventLink: "https://www.defcon.org/",
-    },
-    {
-      name: "Green Tech Hackathon",
-      date: "April 2023",
-      organization: "Greenpeace",
-      achievement: "Most Scalable Solution",
-      projectSummary:
-        "Created a blockchain-based platform for tracking and verifying carbon credits to combat greenwashing.",
-      repoLink: "https://github.com/johndoe/carbon-credit-tracker",
-      eventLink: "https://www.greenpeace.org/international/",
-    },
-  ];
-
-  const projects = [
-    {
-      name: "AI-Powered Task Manager",
-      description:
-        "A task management application that uses natural language processing to automatically categorize and prioritize tasks.",
-      technologies: ["React", "Node.js", "MongoDB", "TensorFlow.js"],
-      githubLink: "https://github.com/johndoe/ai-task-manager",
-      demoLink: "https://ai-task-manager.example.com",
-    },
-    {
-      name: "Blockchain Voting System",
-      description:
-        "A secure and transparent voting system built on blockchain technology to ensure the integrity of election processes.",
-      technologies: ["Solidity", "Ethereum", "Web3.js", "React"],
-      githubLink: "https://github.com/johndoe/blockchain-voting",
-      demoLink: "https://blockchain-voting.example.com",
-    },
-    {
-      name: "IoT Home Automation",
-      description:
-        "A smart home system that integrates various IoT devices and provides a unified control interface through a mobile app.",
-      technologies: ["React Native", "Node.js", "MQTT", "Raspberry Pi"],
-      githubLink: "https://github.com/johndoe/iot-home-automation",
-      demoLink: "https://iot-home.example.com",
-    },
-    {
-      name: "AR Navigation App",
-      description:
-        "An augmented reality navigation app that overlays directions and points of interest on the real world through the camera view.",
-      technologies: ["ARKit", "Swift", "CoreLocation", "MapKit"],
-      githubLink: "https://github.com/johndoe/ar-navigation",
-      demoLink: "https://ar-nav.example.com",
-    },
-    {
-      name: "Quantum Algorithm Simulator",
-      description:
-        "A web-based simulator for quantum computing algorithms, allowing users to experiment with quantum circuits.",
-      technologies: ["Python", "Qiskit", "Flask", "React"],
-      githubLink: "https://github.com/johndoe/quantum-simulator",
-      demoLink: "https://quantum-sim.example.com",
-    },
-    {
-      name: "Sustainable Energy Tracker",
-      description:
-        "A mobile app that helps users track and optimize their energy consumption, promoting sustainable living practices.",
-      technologies: ["Flutter", "Firebase", "TensorFlow Lite"],
-      githubLink: "https://github.com/johndoe/energy-tracker",
-      demoLink: "https://energy-tracker.example.com",
-    },
-    {
-      name: "Decentralized Social Media Platform",
-      description:
-        "A blockchain-based social media platform that gives users full control over their data and content.",
-      technologies: ["React", "Node.js", "IPFS", "Ethereum"],
-      githubLink: "https://github.com/johndoe/decentra-social",
-      demoLink: "https://decentra-social.example.com",
-    },
-    {
-      name: "AI-Driven Financial Advisor",
-      description:
-        "An AI-powered application that provides personalized financial advice based on user's spending habits and financial goals.",
-      technologies: ["Python", "TensorFlow", "Flask", "React"],
-      githubLink: "https://github.com/johndoe/ai-financial-advisor",
-      demoLink: "https://ai-financial-advisor.example.com",
-    },
-    {
-      name: "AI-Driven Financial Advisor",
-      description:
-        "An AI-powered application that provides personalized financial advice based on user's spending habits and financial goals.",
-      technologies: ["Python", "TensorFlow", "Flask", "React"],
-      githubLink: "https://github.com/johndoe/ai-financial-advisor",
-      demoLink: "https://ai-financial-advisor.example.com",
-    },
-    {
-      name: "AI-Driven Financial Advisor",
-      description:
-        "An AI-powered application that provides personalized financial advice based on user's spending habits and financial goals.",
-      technologies: ["Python", "TensorFlow", "Flask", "React"],
-      githubLink: "https://github.com/johndoe/ai-financial-advisor",
-      demoLink: "https://ai-financial-advisor.example.com",
-    },
-    {
-      name: "AI-Driven Financial Advisor",
-      description:
-        "An AI-powered application that provides personalized financial advice based on user's spending habits and financial goals.",
-      technologies: ["Python", "TensorFlow", "Flask", "React"],
-      githubLink: "https://github.com/johndoe/ai-financial-advisor",
-      demoLink: "https://ai-financial-advisor.example.com",
-    },
-  ];
-
-  const extracurricular = [
-    {
-      title: "Robotics Club",
-      role: "Team Lead",
-      description:
-        "Led a team of 5 in designing and building an autonomous robot for the annual robotics competition.",
-    },
-    {
-      title: "Hackathon Participant",
-      role: "Developer",
-      description:
-        "Participated in 3 hackathons, winning 2nd place in the university-wide coding challenge.",
-    },
-    {
-      title: "Computer Science Tutor",
-      role: "Peer Tutor",
-      description:
-        "Assisted fellow students with programming concepts and debugging in Java and Python.",
-    },
-    {
-      title: "AI Research Assistant",
-      role: "Undergraduate Researcher",
-      description:
-        "Collaborated with professors on machine learning projects, co-authoring a paper on neural network optimization.",
-    },
+    { href: "#certifications", text: "Certifications" },
+    { href: "#courses", text: "Courses" },
+    { href: "#hackathons", text: "Competitions" },
+    { href: "#extracurricular", text: "Extra-Curricular" },
   ];
 
   return (
@@ -351,31 +163,52 @@ export default function Component() {
             <p className="text-xl text-gray-600 dark:text-gray-400 mb-4">
               {userData.descriptors}
             </p>
-            <p className="text-xl md:max-w-[80%] text-gray-700 dark:text-gray-400 mb-4">
+            <p className="text-xl md:max-w-[85%] text-gray-700 dark:text-gray-400 mb-8">
               {userData.about}
             </p>
-            <div className="flex justify-center md:justify-start space-x-4">
-              <a
-                href={`mailto:${userData.email}`}
-                className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 transition-colors"
+            <div className="flex flex-wrap justify-center md:justify-start gap-4">
+              <button
+                className="group relative overflow-hidden rounded-lg bg-gradient-to-br from-purple-500 to-blue-500 px-6 py-2 text-white shadow-lg transition-transform hover:scale-105 active:scale-95"
+                onClick={() => alert("Downloading resume...")}
               >
-                <MailIcon className="h-6 w-6" />
-              </a>
-
-              <a
-                href={userData.github}
-                target="_blank"
-                className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 transition-colors"
+                <span className="relative z-10 flex items-center justify-center">
+                  Download Resume
+                  <DownloadIcon className="ml-2 h-5 w-5" />
+                </span>
+                <span className="absolute inset-0 z-0 bg-gradient-to-br from-blue-500 to-purple-500 opacity-0 transition-opacity group-hover:opacity-100" />
+              </button>
+              <button
+                className="group relative overflow-hidden rounded-lg bg-gradient-to-br from-gray-700 to-gray-900 px-6 py-2 text-white shadow-lg transition-transform hover:scale-105 active:scale-95"
+                onClick={() => window.open(userData.github, "_blank")}
               >
-                <Github className="h-6 w-6" />
-              </a>
-              <a
-                href={userData.linkedin}
-                target="_blank"
-                className="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 transition-colors"
+                <span className="relative z-10 flex items-center justify-center">
+                  GitHub
+                  <GithubIcon className="ml-2 h-5 w-5" />
+                </span>
+                <span className="absolute inset-0 z-0 bg-gradient-to-br from-gray-900 to-gray-700 opacity-0 transition-opacity group-hover:opacity-100" />
+              </button>
+              <button
+                className="group relative overflow-hidden rounded-lg bg-gradient-to-br from-blue-400 to-blue-600 px-6 py-2 text-white shadow-lg transition-transform hover:scale-105 active:scale-95"
+                onClick={() => window.open(userData.linkedin, "_blank")}
               >
-                <LinkedinIcon className="h-6 w-6" />
-              </a>
+                <span className="relative z-10 flex items-center justify-center">
+                  Connect
+                  <LinkedinIcon className="ml-2 h-5 w-5" />
+                </span>
+                <span className="absolute inset-0 z-0 bg-gradient-to-br from-blue-600 to-blue-400 opacity-0 transition-opacity group-hover:opacity-100" />
+              </button>
+              <button
+                className="group relative overflow-hidden rounded-lg bg-gradient-to-br from-red-500 to-red-700 px-6 py-2 text-white shadow-lg transition-transform hover:scale-105 active:scale-95"
+                onClick={() =>
+                  (window.location.href = `mailto:${userData.email}`)
+                }
+              >
+                <span className="relative z-10 flex items-center justify-center">
+                  Email
+                  <MailIcon className="ml-2 h-5 w-5" />
+                </span>
+                <span className="absolute inset-0 z-0 bg-gradient-to-br from-red-700 to-red-500 opacity-0 transition-opacity group-hover:opacity-100" />
+              </button>
             </div>
           </div>
         </section>
@@ -407,7 +240,7 @@ export default function Component() {
           <h2 className="text-2xl font-bold border-b-2 border-gray-200 dark:border-gray-700 pb-2">
             Projects
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
             {userData.projects
               .slice(
                 0,
@@ -422,36 +255,41 @@ export default function Component() {
               .map((project, index) => (
                 <div
                   key={index}
-                  className={`bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 space-y-4 ${
-                    index >= 4 && !showAllProjects
-                      ? "opacity-0 md:opacity-100 md:relative"
-                      : ""
-                  }`}
+                  className={`bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 space-y-4`}
                   style={
-                    !showAllProjects &&
-                    ((userData.projects.length > 6 &&
-                      index >= 4 &&
-                      index < 6 &&
-                      windowWidth > 768) ||
-                      (userData.projects.length > 4 &&
-                        index == 3 &&
-                        windowWidth <= 768))
-                      ? {
-                          maskImage:
-                            "linear-gradient(to bottom, black 30%, transparent 100%)",
-                          WebkitMaskImage:
-                            "linear-gradient(to bottom, black 30%, transparent 100%)",
-                        }
+                    !showAllProjects
+                      ? (userData.projects.length > 6 &&
+                          index >= 3 &&
+                          index < 6 &&
+                          windowWidth >= 1280) ||
+                        (userData.projects.length > 6 &&
+                          index >= 4 &&
+                          index < 6 &&
+                          windowWidth > 768 &&
+                          windowWidth < 1280) ||
+                        (userData.projects.length > 4 &&
+                          index == 3 &&
+                          windowWidth <= 768)
+                        ? {
+                            maskImage:
+                              "linear-gradient(to bottom, black 30%, transparent 100%)",
+                            WebkitMaskImage:
+                              "linear-gradient(to bottom, black 30%, transparent 100%)",
+                          }
+                        : {}
                       : {}
                   }
                 >
-                  <img
+                  {/* <img
                     src={project.image}
                     width={"400px"}
                     height={"225px"}
                     alt="Project  "
                     className="rounded-t-xl w-full aspect-[16/9] object-cover"
-                  />
+                  /> */}
+                  <div className="mx-4 mb-8 max-w-[500px] max-h-[300px] overflow-visible">
+                    <Carousel images={project.images} />
+                  </div>
                   <h3 className="text-xl font-semibold">{project.name}</h3>
                   <p className="text-gray-600 dark:text-gray-400">
                     {project.description}
@@ -483,7 +321,12 @@ export default function Component() {
           (windowWidth <= 768 && userData.projects.length > 4) ? (
             <div className="text-center">
               <button
-                onClick={() => setShowAllProjects(!showAllProjects)}
+                onClick={() => {
+                  setShowAllProjects(!showAllProjects);
+                  if (showAllProjects) {
+                    scrollToTarget("projects");
+                  }
+                }}
                 className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
               >
                 {showAllProjects ? "Show Less" : "View More"}
@@ -576,11 +419,9 @@ export default function Component() {
               >
                 <div className="flex items-center space-x-4">
                   <img
-                    src={cert.logo}
+                    src={`${PUBLIC_URL}${cert.logo}`}
                     alt={`${cert.organization} logo`}
-                    width={60}
-                    height={60}
-                    className="rounded-full"
+                    className="rounded-full w-[60px] h-[60px] object-contain bg-white"
                   />
                   <div>
                     <h3 className="text-lg font-semibold">{cert.name}</h3>
@@ -594,7 +435,9 @@ export default function Component() {
                     <p className="text-sm text-gray-500 dark:text-gray-400">
                       {cert.year}
                     </p>
-                    <CertificateButton repoLink={cert.certificate}>
+                    <CertificateButton
+                      repoLink={`${PUBLIC_URL}${cert.preview}`}
+                    >
                       View Certificate
                     </CertificateButton>
                   </div>
@@ -688,7 +531,12 @@ export default function Component() {
           (windowWidth <= 768 && userData.courses.length > 4) ? (
             <div className="text-center">
               <button
-                onClick={() => setShowAllCourses(!showAllCourses)}
+                onClick={() => {
+                  setShowAllCourses(!showAllCourses);
+                  if (!showAllCourses) {
+                    scrollToTarget("courses");
+                  }
+                }}
                 className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
               >
                 {showAllCourses ? "Show Less" : "View More"}
@@ -797,9 +645,9 @@ export default function Component() {
             Extracurricular Activities
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {userData.extracurricular.map((activity) => (
+            {userData.extracurricular.map((activity, index) => (
               <div
-                key={activity.title}
+                key={index}
                 className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 space-y-2"
               >
                 <h3 className="text-lg font-semibold">{activity.title}</h3>
